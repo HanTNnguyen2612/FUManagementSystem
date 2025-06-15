@@ -1,0 +1,361 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\trannguyenhanmvc\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|solutionrelative:trannguyenhanmvc\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\services\\isystemaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|solutionrelative:services\\isystemaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\trannguyenhanmvc\\controllers\\tagscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|solutionrelative:trannguyenhanmvc\\controllers\\tagscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\trannguyenhanmvc\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|solutionrelative:trannguyenhanmvc\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\trannguyenhanmvc\\controllers\\newsarticlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|solutionrelative:trannguyenhanmvc\\controllers\\newsarticlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\services\\newarticleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|solutionrelative:services\\newarticleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\services\\systemaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|solutionrelative:services\\systemaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|solutionrelative:services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\services\\tagservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|solutionrelative:services\\tagservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\services\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7C6089-EC6D-4ED9-8A7C-CE2A2141CA13}|Services\\Services.csproj|solutionrelative:services\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\trannguyenhanmvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|solutionrelative:trannguyenhanmvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\trannguyenhanmvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A378B0C-23BF-4260-A783-2B4977CD4543}|TranNguyenHanMVC\\TranNguyenHanMVC.csproj|solutionrelative:trannguyenhanmvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C35706F-48AB-4643-A88F-B4F955DD0F54}|Repository\\Repositories.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\repository\\newarticlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C35706F-48AB-4643-A88F-B4F955DD0F54}|Repository\\Repositories.csproj|solutionrelative:repository\\newarticlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C35706F-48AB-4643-A88F-B4F955DD0F54}|Repository\\Repositories.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\repository\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C35706F-48AB-4643-A88F-B4F955DD0F54}|Repository\\Repositories.csproj|solutionrelative:repository\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CBF31B2-D459-4A6A-B102-D3A0A416D888}|BusinessObjects\\BusinessObjects.csproj|e:\\se_ky7\\dependencyinjection_learing\\trannguyenhan_se18b03_a01\\businessobjects\\systemaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CBF31B2-D459-4A6A-B102-D3A0A416D888}|BusinessObjects\\BusinessObjects.csproj|solutionrelative:businessobjects\\systemaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountsController.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\AccountsController.cs",
+              "RelativeDocumentMoniker": "TranNguyenHanMVC\\Controllers\\AccountsController.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\AccountsController.cs",
+              "RelativeToolTip": "TranNguyenHanMVC\\Controllers\\AccountsController.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAlwEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:24:53.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TagsController.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\TagsController.cs",
+              "RelativeDocumentMoniker": "TranNguyenHanMVC\\Controllers\\TagsController.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\TagsController.cs",
+              "RelativeToolTip": "TranNguyenHanMVC\\Controllers\\TagsController.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAQwIYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:23:34.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "TranNguyenHanMVC\\Controllers\\CategoriesController.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "TranNguyenHanMVC\\Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAuwJIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:22:15.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ISystemAccountService.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\ISystemAccountService.cs",
+              "RelativeDocumentMoniker": "Services\\ISystemAccountService.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\ISystemAccountService.cs",
+              "RelativeToolTip": "Services\\ISystemAccountService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:13:41.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SystemAccountService.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\SystemAccountService.cs",
+              "RelativeDocumentMoniker": "Services\\SystemAccountService.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\SystemAccountService.cs",
+              "RelativeToolTip": "Services\\SystemAccountService.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAgwCcAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:13:22.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TagService.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\TagService.cs",
+              "RelativeDocumentMoniker": "Services\\TagService.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\TagService.cs",
+              "RelativeToolTip": "Services\\TagService.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAQwEAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:13:09.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ICategoryService.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\ICategoryService.cs",
+              "RelativeDocumentMoniker": "Services\\ICategoryService.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\ICategoryService.cs",
+              "RelativeToolTip": "Services\\ICategoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:11:02.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\CategoryService.cs",
+              "RelativeDocumentMoniker": "Services\\CategoryService.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\CategoryService.cs",
+              "RelativeToolTip": "Services\\CategoryService.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAQwE0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:10:08.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NewArticleService.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\NewArticleService.cs",
+              "RelativeDocumentMoniker": "Services\\NewArticleService.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Services\\NewArticleService.cs",
+              "RelativeToolTip": "Services\\NewArticleService.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAiwFQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:09:52.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\appsettings.json",
+              "RelativeDocumentMoniker": "TranNguyenHanMVC\\appsettings.json",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\appsettings.json",
+              "RelativeToolTip": "TranNguyenHanMVC\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-15T08:05:50.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:8:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Program.cs",
+              "RelativeDocumentMoniker": "TranNguyenHanMVC\\Program.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Program.cs",
+              "RelativeToolTip": "TranNguyenHanMVC\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:05:21.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "NewArticleRepository.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Repository\\NewArticleRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\NewArticleRepository.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Repository\\NewArticleRepository.cs",
+              "RelativeToolTip": "Repository\\NewArticleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T07:48:36.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Repository\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\CategoryRepository.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\Repository\\CategoryRepository.cs",
+              "RelativeToolTip": "Repository\\CategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T07:48:29.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SystemAccount.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\BusinessObjects\\SystemAccount.cs",
+              "RelativeDocumentMoniker": "BusinessObjects\\SystemAccount.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\BusinessObjects\\SystemAccount.cs",
+              "RelativeToolTip": "BusinessObjects\\SystemAccount.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T07:34:24.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NewsArticlesController.cs",
+              "DocumentMoniker": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\NewsArticlesController.cs",
+              "RelativeDocumentMoniker": "TranNguyenHanMVC\\Controllers\\NewsArticlesController.cs",
+              "ToolTip": "E:\\SE_Ky7\\DependencyInjection_Learing\\TranNguyenHan_SE18B03_A01\\TranNguyenHanMVC\\Controllers\\NewsArticlesController.cs",
+              "RelativeToolTip": "TranNguyenHanMVC\\Controllers\\NewsArticlesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T07:29:59.64Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
