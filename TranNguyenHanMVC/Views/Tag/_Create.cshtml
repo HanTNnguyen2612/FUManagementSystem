@@ -1,0 +1,37 @@
+﻿@model BusinessObjects.Tag
+
+<form id="createTagForm" asp-action="Create" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="TagName" class="control-label"></label>
+        <input asp-for="TagName" class="form-control" />
+        <span asp-validation-for="TagName" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Note" class="control-label"></label>
+        <textarea asp-for="Note" class="form-control"></textarea>
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>
+
+<script>
+    $('#createTagForm').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/Tags/Create',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    $('#createModal').modal('hide');
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
+    });
+</script>

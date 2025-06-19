@@ -1,32 +1,39 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TranNguyenHanMVC.Models;
+using Services;
+using System.Linq;
 
-namespace TranNguyenHanMVC.Controllers
+namespace FUNewsManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly INewsArticleService _newsArticleService;
+        private const int PageSize = 10;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(INewsArticleService newsArticleService)
         {
-            _logger = logger;
+            _newsArticleService = newsArticleService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1)
         {
-            return View();
-        }
+            var articles = _newsArticleService.GetArticles()
+                .Where(a => a.NewsStatus == true)
+                .OrderByDescending(a => a.CreatedDate)
+                .ToList();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            var pagedArticles = articles
+                .Skip((pageNumber - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.PagingInfo = new
+            {
+                CurrentPage = pageNumber,
+                ItemsPerPage = PageSize,
+                TotalItems = articles.Count
+            };
+
+            return View(pagedArticles);
         }
     }
 }

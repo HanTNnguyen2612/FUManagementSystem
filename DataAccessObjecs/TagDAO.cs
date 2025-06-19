@@ -10,19 +10,17 @@ namespace DataAccessObjects
     {
         public static List<Tag> GetTags()
         {
-            var listTags = new List<Tag>();
             try
             {
                 using (var db = new FunewsManagementContext())
                 {
-                    listTags = db.Tags.ToList();
+                    return db.Tags.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception("Error getting tags: " + e.Message);
             }
-            return listTags;
         }
 
         public static Tag GetTagById(int id)
@@ -36,7 +34,24 @@ namespace DataAccessObjects
             }
             catch (Exception e)
             {
-                throw new Exception("Error getting tag: " + e.Message);
+                throw new Exception("Error getting tag by ID: " + e.Message);
+            }
+        }
+
+        public static List<Tag> SearchTags(string keyword)
+        {
+            try
+            {
+                using (var db = new FunewsManagementContext())
+                {
+                    return db.Tags
+                        .Where(t => t.TagName.Contains(keyword) || t.Note.Contains(keyword))
+                        .ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error searching tags: " + e.Message);
             }
         }
 
@@ -44,15 +59,15 @@ namespace DataAccessObjects
         {
             try
             {
-                using (var context = new FunewsManagementContext())
+                using (var db = new FunewsManagementContext())
                 {
-                    context.Tags.Add(tag);
-                    context.SaveChanges();
+                    db.Tags.Add(tag);
+                    db.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception("Error saving tag: " + e.Message);
             }
         }
 
@@ -60,21 +75,21 @@ namespace DataAccessObjects
         {
             try
             {
-                using (var context = new FunewsManagementContext())
+                using (var db = new FunewsManagementContext())
                 {
-                    var existingTag = context.Tags.FirstOrDefault(t => t.TagId == tag.TagId);
-                    if (existingTag != null)
-                    {
-                        existingTag.TagName = tag.TagName;
-                        existingTag.Note = tag.Note;
-                        context.Entry(existingTag).State = EntityState.Modified;
-                        context.SaveChanges();
-                    }
+                    var existingTag = db.Tags.FirstOrDefault(t => t.TagId == tag.TagId);
+                    if (existingTag == null)
+                        throw new Exception("Tag not found.");
+
+                    existingTag.TagName = tag.TagName;
+                    existingTag.Note = tag.Note;
+
+                    db.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception("Error updating tag: " + e.Message);
             }
         }
 
@@ -82,19 +97,22 @@ namespace DataAccessObjects
         {
             try
             {
-                using (var context = new FunewsManagementContext())
+                using (var db = new FunewsManagementContext())
                 {
-                    var existingTag = context.Tags.FirstOrDefault(t => t.TagId == tag.TagId);
-                    if (existingTag != null)
-                    {
-                        context.Tags.Remove(existingTag);
-                        context.SaveChanges();
-                    }
+                    if (db.NewsArticles.Any(n => n.Tags.Any(t => t.TagId == tag.TagId)))
+                        throw new Exception("Cannot delete tag as it is associated with news articles.");
+
+                    var existingTag = db.Tags.FirstOrDefault(t => t.TagId == tag.TagId);
+                    if (existingTag == null)
+                        throw new Exception("Tag not found.");
+
+                    db.Tags.Remove(existingTag);
+                    db.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception("Error deleting tag: " + e.Message);
             }
         }
     }

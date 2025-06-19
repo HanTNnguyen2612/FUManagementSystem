@@ -1,156 +1,152 @@
 ﻿using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
-namespace FUNewsManagement.Controllers
+namespace FUNewsManagementSystem.Controllers
 {
+    [Authorize(Roles = "1")] // Chỉ Staff (Role = 1) được quản lý bài báo
     public class NewsArticlesController : Controller
     {
         private readonly INewsArticleService _newsArticleService;
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
+        private const int PageSize = 10;
 
-        public NewsArticlesController(INewsArticleService newsArticleService, ICategoryService categoryService, ITagService tagService)
+        public NewsArticlesController(INewsArticleService newsArticleService,
+                                     ICategoryService categoryService,
+                                     ITagService tagService)
         {
             _newsArticleService = newsArticleService;
             _categoryService = categoryService;
             _tagService = tagService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1, string searchKeyword = "")
         {
-            var userRole = HttpContext.Session.GetString("UserRole");
-            if (userRole == "2") // Lecturer
+            var articles = string.IsNullOrEmpty(searchKeyword)
+                ? _newsArticleService.GetArticles()
+                : _newsArticleService.SearchArticles(searchKeyword);
+
+            var pagedArticles = articles
+                .Skip((pageNumber - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
+
+            ViewBag.PagingInfo = new
             {
-                var articles = _newsArticleService.GetNewsArticles().Where(a => a.NewsStatus == true).ToList();
-                return View(articles);
+                CurrentPage = pageNumber,
+                ItemsPerPage = PageSize,
+                TotalItems = articles.Count
+            };
+            ViewBag.SearchKeyword = searchKeyword;
+
+            return View(pagedArticles);
+        }
+
+        public IActionResult Create()
+        {
+            ViewBag.Categories = _categoryService.GetCategories();
+            ViewBag.Tags = _tagService.GetTags();
+            return PartialView("_Create", new NewsArticle());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(NewsArticle article, int[] selectedTagIds)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _categoryService.GetCategories();
+                ViewBag.Tags = _tagService.GetTags();
+                return PartialView("_Create", article);
             }
-            else if (userRole == "1") // Staff
+
+            try
             {
-                var userId = short.Parse(HttpContext.Session.GetString("UserId"));
-                var articles = _newsArticleService.GetNewsArticlesByStaff(userId);
-                return View(articles);
+                var accountId = short.Parse(User.FindFirst("AccountId").Value);
+                article.CreatedById = accountId;
+                article.CreatedDate = DateTime.Now;
+                _newsArticleService.SaveArticle(article, selectedTagIds?.ToList() ?? new List<int>()); // Chuyển int[] sang List<int>
+                return Json(new { success = true });
             }
-            else if (userRole == "0") // Admin
+            catch (Exception ex)
             {
-                var articles = _newsArticleService.GetNewsArticles();
-                return View(articles);
+                return Json(new { success = false, message = ex.Message });
             }
-            else
+        }
+
+        public IActionResult Edit(string id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var article = _newsArticleService.GetArticleById(id);
+            if (article == null)
+                return NotFound();
+
+            ViewBag.Categories = _categoryService.GetCategories();
+            ViewBag.Tags = _tagService.GetTags();
+            ViewBag.SelectedTagIds = article.Tags.Select(t => t.TagId).ToArray();
+            return PartialView("_Edit", article);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(string id, NewsArticle article, int[] selectedTagIds)
+        {
+            if (id != article.NewsArticleId || !ModelState.IsValid)
             {
-                var articles = _newsArticleService.GetNewsArticles().Where(a => a.NewsStatus == true).ToList();
-                return View(articles);
+                ViewBag.Categories = _categoryService.GetCategories();
+                ViewBag.Tags = _tagService.GetTags();
+                return PartialView("_Edit", article);
+            }
+
+            try
+            {
+                var accountId = short.Parse(User.FindFirst("AccountId").Value);
+                article.UpdatedById = accountId;
+                article.ModifiedDate = DateTime.Now;
+                _newsArticleService.UpdateArticle(article, selectedTagIds?.ToList() ?? new List<int>()); // Chuyển int[] sang List<int>
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(string id)
+        {
+            try
+            {
+                var article = _newsArticleService.GetArticleById(id);
+                if (article == null)
+                    return Json(new { success = false, message = "Article not found." });
+
+                _newsArticleService.DeleteArticle(article);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
             }
         }
 
         public IActionResult Details(string id)
         {
-            var article = _newsArticleService.GetNewsArticleById(id);
-            if (article == null || (HttpContext.Session.GetString("UserRole") == "2" && article.NewsStatus != true))
+            if (id == null)
                 return NotFound();
 
-            return View(article);
-        }
-
-        public IActionResult Create()
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            ViewData["CategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName");
-            ViewData["Tags"] = new Microsoft.AspNetCore.Mvc.Rendering.MultiSelectList(_tagService.GetTags(), "TagId", "TagName");
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(NewsArticle article, List<int> tagIds)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            if (ModelState.IsValid)
-            {
-                article.CreatedById = short.Parse(HttpContext.Session.GetString("UserId"));
-                _newsArticleService.SaveNewsArticle(article, tagIds);
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", article.CategoryId);
-            ViewData["Tags"] = new Microsoft.AspNetCore.Mvc.Rendering.MultiSelectList(_tagService.GetTags(), "TagId", "TagName", tagIds);
-            return View(article);
-        }
-
-        public IActionResult Edit(string id)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            var article = _newsArticleService.GetNewsArticleById(id);
-            if (article == null)
-                return NotFound();
-
-            ViewData["CategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", article.CategoryId);
-            ViewData["Tags"] = new Microsoft.AspNetCore.Mvc.Rendering.MultiSelectList(_tagService.GetTags(), "TagId", "TagName", article.Tags.Select(t => t.TagId).ToList());
-            return View(article);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(string id, NewsArticle article, List<int> tagIds)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            if (id != article.NewsArticleId)
-                return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    article.UpdatedById = short.Parse(HttpContext.Session.GetString("UserId"));
-                    _newsArticleService.UpdateNewsArticle(article, tagIds);
-                }
-                catch
-                {
-                    if (_newsArticleService.GetNewsArticleById(id) == null)
-                        return NotFound();
-                    throw;
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", article.CategoryId);
-            ViewData["Tags"] = new Microsoft.AspNetCore.Mvc.Rendering.MultiSelectList(_tagService.GetTags(), "TagId", "TagName", tagIds);
-            return View(article);
-        }
-
-        public IActionResult Delete(string id)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            var article = _newsArticleService.GetNewsArticleById(id);
+            var article = _newsArticleService.GetArticleById(id);
             if (article == null)
                 return NotFound();
 
             return View(article);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(string id)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            var article = _newsArticleService.GetNewsArticleById(id);
-            if (article != null)
-            {
-                _newsArticleService.DeleteNewsArticle(article);
-            }
-            return RedirectToAction(nameof(Index));
         }
     }
 }

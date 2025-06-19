@@ -1,147 +1,141 @@
 ﻿using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using System.Linq;
 
-namespace FUNewsManagement.Controllers
+namespace FUNewsManagementSystem.Controllers
 {
+    [Authorize(Roles = "1")] // Chỉ Staff (Role = 1) được quản lý danh mục
     public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private const int PageSize = 10;
 
         public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        // GET: Categories
+        public IActionResult Index(int pageNumber = 1, string searchKeyword = "")
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            var categories = string.IsNullOrEmpty(searchKeyword)
+                ? _categoryService.GetCategories()
+                : _categoryService.SearchCategories(searchKeyword);
 
-            var categories = _categoryService.GetCategories();
-            return View(categories);
+            var pagedCategories = categories
+                .Skip((pageNumber - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
+
+            ViewBag.PagingInfo = new
+            {
+                CurrentPage = pageNumber,
+                ItemsPerPage = PageSize,
+                TotalItems = categories.Count
+            };
+            ViewBag.SearchKeyword = searchKeyword;
+
+            return View(pagedCategories);
         }
 
-        public IActionResult Details(short? id)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            if (id == null)
-                return NotFound();
-
-            var category = _categoryService.GetCategoryById(id.Value);
-            if (category == null)
-                return NotFound();
-
-            return View(category);
-        }
-
+        // GET: Categories/Create
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            ViewData["ParentCategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName");
-            return View();
+            ViewBag.ParentCategories = _categoryService.GetCategories();
+            return PartialView("_Create", new Category());
         }
 
+        // POST: Categories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category category)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ParentCategories = _categoryService.GetCategories();
+                return PartialView("_Create", category);
+            }
 
-            if (ModelState.IsValid)
+            try
             {
                 _categoryService.SaveCategory(category);
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true });
             }
-            ViewData["ParentCategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", category.ParentCategoryId);
-            return View(category);
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
+        // GET: Categories/Edit/5
         public IActionResult Edit(short? id)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
             if (id == null)
                 return NotFound();
 
-            var category = _categoryService.GetCategoryById(id.Value);
+            var category = _categoryService.GetCategoryById((short)id);
             if (category == null)
                 return NotFound();
 
-            ViewData["ParentCategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", category.ParentCategoryId);
-            return View(category);
+            ViewBag.ParentCategories = _categoryService.GetCategories();
+            return PartialView("_Edit", category);
         }
 
+        // POST: Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(short id, Category category)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            if (id != category.CategoryId)
-                return NotFound();
-
-            if (ModelState.IsValid)
+            if (id != category.CategoryId || !ModelState.IsValid)
             {
-                try
-                {
-                    _categoryService.UpdateCategory(category);
-                }
-                catch
-                {
-                    if (_categoryService.GetCategoryById(id) == null)
-                        return NotFound();
-                    throw;
-                }
-                return RedirectToAction(nameof(Index));
+                ViewBag.ParentCategories = _categoryService.GetCategories();
+                return PartialView("_Edit", category);
             }
-            ViewData["ParentCategoryId"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", category.ParentCategoryId);
-            return View(category);
+
+            try
+            {
+                _categoryService.UpdateCategory(category);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
-        public IActionResult Delete(short? id)
+        // POST: Categories/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(short id)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            try
+            {
+                var category = _categoryService.GetCategoryById(id);
+                if (category == null)
+                    return Json(new { success = false, message = "Category not found." });
 
+                _categoryService.DeleteCategory(category);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // GET: Categories/Details/5
+        public IActionResult Details(short? id)
+        {
             if (id == null)
                 return NotFound();
 
-            var category = _categoryService.GetCategoryById(id.Value);
+            var category = _categoryService.GetCategoryById((short)id);
             if (category == null)
                 return NotFound();
 
             return View(category);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(short id)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            var category = _categoryService.GetCategoryById(id);
-            if (category != null)
-            {
-                try
-                {
-                    _categoryService.DeleteCategory(category);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    ModelState.AddModelError("", ex.Message);
-                    return View(category);
-                }
-            }
-            return RedirectToAction(nameof(Index));
         }
     }
 }

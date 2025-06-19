@@ -14,46 +14,40 @@ namespace Services
             _newsArticleRepository = newsArticleRepository;
         }
 
-        public List<NewsArticle> GetNewsArticles()
+        public List<NewsArticle> GetArticles()
         {
-            return _newsArticleRepository.GetNewsArticles();
+            return _newsArticleRepository.GetArticles();
         }
 
-        public List<NewsArticle> GetNewsArticlesByStaff(short staffId)
+        public NewsArticle GetArticleById(string id)
         {
-            return _newsArticleRepository.GetNewsArticlesByStaff(staffId);
+            return _newsArticleRepository.GetArticleById(id);
         }
 
-        public NewsArticle GetNewsArticleById(string id)
+        public List<NewsArticle> SearchArticles(string keyword)
         {
-            return _newsArticleRepository.GetNewsArticleById(id);
+            return _newsArticleRepository.SearchArticles(keyword);
         }
 
-        public void SaveNewsArticle(NewsArticle article, List<int> tagIds)
+        public void SaveArticle(NewsArticle article, List<int> tagIds)
         {
             if (!ValidateNewsArticle(article))
-                throw new ArgumentException("Invalid news article data.");
+                throw new ArgumentException("Invalid article data.");
 
-            article.CreatedDate = DateTime.Now;
-            article.ModifiedDate = DateTime.Now;
-            _newsArticleRepository.SaveNewsArticle(article, tagIds);
+            _newsArticleRepository.SaveArticle(article, tagIds);
         }
 
-        public void UpdateNewsArticle(NewsArticle article, List<int> tagIds)
+        public void UpdateArticle(NewsArticle article, List<int> tagIds)
         {
             if (!ValidateNewsArticle(article))
-                throw new ArgumentException("Invalid news article data.");
+                throw new ArgumentException("Invalid article data.");
 
-            article.ModifiedDate = DateTime.Now;
-            _newsArticleRepository.UpdateNewsArticle(article, tagIds);
+            _newsArticleRepository.UpdateArticle(article, tagIds);
         }
 
-        public void DeleteNewsArticle(NewsArticle article)
+        public void DeleteArticle(NewsArticle article)
         {
-            if (article == null)
-                throw new ArgumentException("News article not found.");
-
-            _newsArticleRepository.DeleteNewsArticle(article);
+            _newsArticleRepository.DeleteArticle(article);
         }
 
         private bool ValidateNewsArticle(NewsArticle article)
@@ -65,9 +59,6 @@ namespace Services
                 return false;
 
             if (string.IsNullOrWhiteSpace(article.Headline) || article.Headline.Length > 150)
-                return false;
-
-            if (!article.CategoryId.HasValue)
                 return false;
 
             if (article.NewsTitle != null && article.NewsTitle.Length > 400)

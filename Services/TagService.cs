@@ -24,6 +24,11 @@ namespace Services
             return _tagRepository.GetTagById(id);
         }
 
+        public List<Tag> SearchTags(string keyword)
+        {
+            return _tagRepository.SearchTags(keyword);
+        }
+
         public void SaveTag(Tag tag)
         {
             if (!ValidateTag(tag))
@@ -42,13 +47,10 @@ namespace Services
 
         public void DeleteTag(Tag tag)
         {
-            if (tag == null)
-                throw new ArgumentException("Tag not found.");
-
             _tagRepository.DeleteTag(tag);
         }
 
-        public bool ValidateTag(Tag tag)
+        private bool ValidateTag(Tag tag)
         {
             if (tag == null)
                 return false;

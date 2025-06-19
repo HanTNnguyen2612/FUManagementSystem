@@ -24,6 +24,11 @@ namespace Services
             return _categoryRepository.GetCategoryById(id);
         }
 
+        public List<Category> SearchCategories(string keyword)
+        {
+            return _categoryRepository.SearchCategories(keyword);
+        }
+
         public void SaveCategory(Category category)
         {
             if (!ValidateCategory(category))
@@ -42,18 +47,10 @@ namespace Services
 
         public void DeleteCategory(Category category)
         {
-            if (!_categoryRepository.CanDeleteCategory(category.CategoryId))
-                throw new InvalidOperationException("Cannot delete category as it is linked to news articles.");
-
             _categoryRepository.DeleteCategory(category);
         }
 
-        public bool CanDeleteCategory(short id)
-        {
-            return _categoryRepository.CanDeleteCategory(id);
-        }
-
-        public bool ValidateCategory(Category category)
+        private bool ValidateCategory(Category category)
         {
             if (category == null)
                 return false;
@@ -65,14 +62,6 @@ namespace Services
                 return false;
 
             return true;
-        }
-
-        public List<Category> SearchCategories(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-                return _categoryRepository.GetCategories();
-
-            return _categoryRepository.SearchCategories(name);
         }
     }
 }

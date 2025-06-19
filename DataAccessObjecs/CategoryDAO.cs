@@ -10,13 +10,14 @@ namespace DataAccessObjects
     {
         public static List<Category> GetCategories()
         {
-            var listCategories = new List<Category>();
             try
             {
                 using (var db = new FunewsManagementContext())
                 {
-                    listCategories = db.Categories
+                    return db.Categories
                         .Include(c => c.ParentCategory)
+                        .Include(c => c.InverseParentCategory)
+                        .Where(c => c.IsActive == true)
                         .ToList();
                 }
             }
@@ -24,7 +25,6 @@ namespace DataAccessObjects
             {
                 throw new Exception("Error getting categories: " + e.Message);
             }
-            return listCategories;
         }
 
         public static Category GetCategoryById(short id)
@@ -35,85 +35,26 @@ namespace DataAccessObjects
                 {
                     return db.Categories
                         .Include(c => c.ParentCategory)
-                        .FirstOrDefault(c => c.CategoryId == id);
+                        .Include(c => c.InverseParentCategory)
+                        .FirstOrDefault(c => c.CategoryId == id && c.IsActive == true);
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Error getting category: " + e.Message);
+                throw new Exception("Error getting category by ID: " + e.Message);
             }
         }
 
-        public static void SaveCategory(Category category)
+        public static List<Category> SearchCategories(string keyword)
         {
-            try
-            {
-                using (var context = new FunewsManagementContext())
-                {
-                    context.Categories.Add(category);
-                    context.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        public static void UpdateCategory(Category category)
-        {
-            try
-            {
-                using (var context = new FunewsManagementContext())
-                {
-                    var existingCategory = context.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
-                    if (existingCategory != null)
-                    {
-                        existingCategory.CategoryName = category.CategoryName;
-                        existingCategory.CategoryDesciption = category.CategoryDesciption;
-                        existingCategory.ParentCategoryId = category.ParentCategoryId;
-                        existingCategory.IsActive = category.IsActive;
-                        context.Entry(existingCategory).State = EntityState.Modified;
-                        context.SaveChanges();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        public static void DeleteCategory(Category category)
-        {
-            try
-            {
-                using (var context = new FunewsManagementContext())
-                {
-                    var existingCategory = context.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
-                    if (existingCategory != null)
-                    {
-                        context.Categories.Remove(existingCategory);
-                        context.SaveChanges();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        public static List<Category> SearchCategories(string name)
-        {
-            var listCategories = new List<Category>();
             try
             {
                 using (var db = new FunewsManagementContext())
                 {
-                    listCategories = db.Categories
-                        .Where(c => c.CategoryName.Contains(name))
+                    return db.Categories
                         .Include(c => c.ParentCategory)
+                        .Where(c => c.IsActive == true &&
+                                   (c.CategoryName.Contains(keyword) || c.CategoryDesciption.Contains(keyword)))
                         .ToList();
                 }
             }
@@ -121,22 +62,68 @@ namespace DataAccessObjects
             {
                 throw new Exception("Error searching categories: " + e.Message);
             }
-            return listCategories;
         }
 
-        public static bool CanDeleteCategory(short id)
+        public static void SaveCategory(Category category)
         {
             try
             {
                 using (var db = new FunewsManagementContext())
                 {
-                    return !db.NewsArticles.Any(n => n.CategoryId == id) &&
-                           !db.Categories.Any(c => c.ParentCategoryId == id);
+                    db.Categories.Add(category);
+                    db.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Error checking category deletion: " + e.Message);
+                throw new Exception("Error saving category: " + e.Message);
+            }
+        }
+
+        public static void UpdateCategory(Category category)
+        {
+            try
+            {
+                using (var db = new FunewsManagementContext())
+                {
+                    var existingCategory = db.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
+                    if (existingCategory == null)
+                        throw new Exception("Category not found.");
+
+                    existingCategory.CategoryName = category.CategoryName;
+                    existingCategory.CategoryDesciption = category.CategoryDesciption;
+                    existingCategory.ParentCategoryId = category.ParentCategoryId;
+                    existingCategory.IsActive = category.IsActive;
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error updating category: " + e.Message);
+            }
+        }
+
+        public static void DeleteCategory(Category category)
+        {
+            try
+            {
+                using (var db = new FunewsManagementContext())
+                {
+                    if (db.NewsArticles.Any(n => n.CategoryId == category.CategoryId))
+                        throw new Exception("Cannot delete category as it is associated with news articles.");
+
+                    var existingCategory = db.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
+                    if (existingCategory == null)
+                        throw new Exception("Category not found.");
+
+                    db.Categories.Remove(existingCategory);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error deleting category: " + e.Message);
             }
         }
     }

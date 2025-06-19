@@ -1,0 +1,38 @@
+﻿@model BusinessObjects.Tag
+
+<form id="editTagForm" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="TagId" />
+    <div class="form-group mb-3">
+        <label asp-for="TagName" class="control-label"></label>
+        <input asp-for="TagName" class="form-control" />
+        <span asp-validation-for="TagName" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Note" class="control-label"></label>
+        <textarea asp-for="Note" class="form-control"></textarea>
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>
+
+<script>
+    $('#editTagForm').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/Tags/Edit',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    $('#editModal').modal('hide');
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
+    });
+</script>

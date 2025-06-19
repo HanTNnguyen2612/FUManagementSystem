@@ -1,135 +1,126 @@
 ﻿using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using System.Linq;
 
-namespace FUNewsManagement.Controllers
+namespace FUNewsManagementSystem.Controllers
 {
+    [Authorize(Roles = "1")] // Chỉ Staff (Role = 1) được quản lý tag
     public class TagsController : Controller
     {
         private readonly ITagService _tagService;
+        private const int PageSize = 10;
 
         public TagsController(ITagService tagService)
         {
             _tagService = tagService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1, string searchKeyword = "")
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            var tags = string.IsNullOrEmpty(searchKeyword)
+                ? _tagService.GetTags()
+                : _tagService.SearchTags(searchKeyword);
 
-            var tags = _tagService.GetTags();
-            return View(tags);
-        }
+            var pagedTags = tags
+                .Skip((pageNumber - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
 
-        public IActionResult Details(int? id)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            ViewBag.PagingInfo = new
+            {
+                CurrentPage = pageNumber,
+                ItemsPerPage = PageSize,
+                TotalItems = tags.Count
+            };
+            ViewBag.SearchKeyword = searchKeyword;
 
-            if (id == null)
-                return NotFound();
-
-            var tag = _tagService.GetTagById(id.Value);
-            if (tag == null)
-                return NotFound();
-
-            return View(tag);
+            return View(pagedTags);
         }
 
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            return View();
+            return PartialView("_Create", new Tag());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Tag tag)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            if (!ModelState.IsValid)
+                return PartialView("_Create", tag);
 
-            if (ModelState.IsValid)
+            try
             {
                 _tagService.SaveTag(tag);
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true });
             }
-            return View(tag);
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
         public IActionResult Edit(int? id)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
             if (id == null)
                 return NotFound();
 
-            var tag = _tagService.GetTagById(id.Value);
+            var tag = _tagService.GetTagById((int)id);
             if (tag == null)
                 return NotFound();
 
-            return View(tag);
+            return PartialView("_Edit", tag);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Tag tag)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            if (id != tag.TagId || !ModelState.IsValid)
+                return PartialView("_Edit", tag);
 
-            if (id != tag.TagId)
-                return NotFound();
-
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _tagService.UpdateTag(tag);
-                }
-                catch
-                {
-                    if (_tagService.GetTagById(id) == null)
-                        return NotFound();
-                    throw;
-                }
-                return RedirectToAction(nameof(Index));
+                _tagService.UpdateTag(tag);
+                return Json(new { success = true });
             }
-            return View(tag);
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
-        public IActionResult Delete(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
         {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
+            try
+            {
+                var tag = _tagService.GetTagById(id);
+                if (tag == null)
+                    return Json(new { success = false, message = "Tag not found." });
 
+                _tagService.DeleteTag(tag);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        public IActionResult Details(int? id)
+        {
             if (id == null)
                 return NotFound();
 
-            var tag = _tagService.GetTagById(id.Value);
+            var tag = _tagService.GetTagById((int)id);
             if (tag == null)
                 return NotFound();
 
             return View(tag);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            if (HttpContext.Session.GetString("UserRole") != "1")
-                return RedirectToAction("Login", "Account");
-
-            var tag = _tagService.GetTagById(id);
-            if (tag != null)
-            {
-                _tagService.DeleteTag(tag);
-            }
-            return RedirectToAction(nameof(Index));
         }
     }
 }

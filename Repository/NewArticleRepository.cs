@@ -6,16 +6,16 @@ namespace Repositories
 {
     public class NewsArticleRepository : INewsArticleRepository
     {
-        public List<NewsArticle> GetNewsArticles() => NewsArticleDAO.GetNewsArticles();
+        public List<NewsArticle> GetArticles() => NewsArticleDAO.GetArticles();
 
-        public List<NewsArticle> GetNewsArticlesByStaff(short staffId) => NewsArticleDAO.GetNewsArticlesByStaff(staffId);
+        public NewsArticle GetArticleById(string id) => NewsArticleDAO.GetArticleById(id);
 
-        public NewsArticle GetNewsArticleById(string id) => NewsArticleDAO.GetNewsArticleById(id);
+        public List<NewsArticle> SearchArticles(string keyword) => NewsArticleDAO.SearchArticles(keyword);
 
-        public void SaveNewsArticle(NewsArticle article, List<int> tagIds) => NewsArticleDAO.SaveNewsArticle(article, tagIds);
+        public void SaveArticle(NewsArticle article, List<int> tagIds) => NewsArticleDAO.SaveArticle(article, tagIds);
 
-        public void UpdateNewsArticle(NewsArticle article, List<int> tagIds) => NewsArticleDAO.UpdateNewsArticle(article, tagIds);
+        public void UpdateArticle(NewsArticle article, List<int> tagIds) => NewsArticleDAO.UpdateArticle(article, tagIds);
 
-        public void DeleteNewsArticle(NewsArticle article) => NewsArticleDAO.DeleteNewsArticle(article);
+        public void DeleteArticle(NewsArticle article) => NewsArticleDAO.DeleteArticle(article);
     }
 }

@@ -1,0 +1,149 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = TranNguyenHanMVC
+build_property.RootNamespace = TranNguyenHanMVC
+build_property.ProjectDir = E:\SE_Ky7\DependencyInjection_Learing\TranNguyenHan_SE18B03_A01\TranNguyenHanMVC\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\SE_Ky7\DependencyInjection_Learing\TranNguyenHan_SE18B03_A01\TranNguyenHanMVC
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Category/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Category/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Category/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Category/_Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcX0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Category/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/_Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcX0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Report/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/SystemAccounts/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtQWNjb3VudHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/SystemAccounts/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtQWNjb3VudHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/SystemAccounts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtQWNjb3VudHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/SystemAccounts/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtQWNjb3VudHNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/SystemAccounts/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtQWNjb3VudHNcUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/SystemAccounts/_Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtQWNjb3VudHNcX0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/SystemAccounts/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtQWNjb3VudHNcX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Tag/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Tag/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Tag/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Tag/_Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXF9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Tag/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnXF9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-rop3om2eby

@@ -5,11 +5,11 @@ namespace Services
 {
     public interface INewsArticleService
     {
-        List<NewsArticle> GetNewsArticles();
-        List<NewsArticle> GetNewsArticlesByStaff(short staffId);
-        NewsArticle GetNewsArticleById(string id);
-        void SaveNewsArticle(NewsArticle article, List<int> tagIds);
-        void UpdateNewsArticle(NewsArticle article, List<int> tagIds);
-        void DeleteNewsArticle(NewsArticle article);
+        List<NewsArticle> GetArticles();
+        NewsArticle GetArticleById(string id);
+        List<NewsArticle> SearchArticles(string keyword);
+        void SaveArticle(NewsArticle article, List<int> tagIds);
+        void UpdateArticle(NewsArticle article, List<int> tagIds);
+        void DeleteArticle(NewsArticle article);
     }
 }

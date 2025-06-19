@@ -10,14 +10,12 @@ namespace Repositories
 
         public Category GetCategoryById(short id) => CategoryDAO.GetCategoryById(id);
 
+        public List<Category> SearchCategories(string keyword) => CategoryDAO.SearchCategories(keyword);
+
         public void SaveCategory(Category category) => CategoryDAO.SaveCategory(category);
 
         public void UpdateCategory(Category category) => CategoryDAO.UpdateCategory(category);
 
         public void DeleteCategory(Category category) => CategoryDAO.DeleteCategory(category);
-
-        public List<Category> SearchCategories(string name) => CategoryDAO.SearchCategories(name);
-
-        public bool CanDeleteCategory(short id) => CategoryDAO.CanDeleteCategory(id);
     }
 }

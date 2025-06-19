@@ -14,6 +14,11 @@ namespace Services
             _systemAccountRepository = systemAccountRepository;
         }
 
+        public List<SystemAccount> GetAccounts()
+        {
+            return _systemAccountRepository.GetAccounts();
+        }
+
         public SystemAccount GetAccountById(short id)
         {
             return _systemAccountRepository.GetAccountById(id);
@@ -22,6 +27,11 @@ namespace Services
         public SystemAccount GetAccountByEmail(string email)
         {
             return _systemAccountRepository.GetAccountByEmail(email);
+        }
+
+        public List<SystemAccount> SearchAccounts(string keyword)
+        {
+            return _systemAccountRepository.SearchAccounts(keyword);
         }
 
         public void SaveAccount(SystemAccount account)
@@ -42,14 +52,10 @@ namespace Services
 
         public void DeleteAccount(SystemAccount account)
         {
-            if (account == null)
-                throw new ArgumentException("Account not found.");
-
             _systemAccountRepository.DeleteAccount(account);
         }
 
-        // Đây là method phụ để kiểm tra tính hợp lệ, không thuộc interface
-        public bool ValidateSystemAccount(SystemAccount account)
+        private bool ValidateSystemAccount(SystemAccount account)
         {
             if (account == null)
                 return false;
