@@ -56,24 +56,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcRGVsZXRlLmNzaHRtbA==
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticles/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcRGV0YWlscy5jc2h0bWw=
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticles/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcSW5kZXguY3NodG1s
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/_Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcX0NyZWF0ZS5jc2h0bWw=
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticles/_Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVzXF9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticle/_Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVcX0VkaXQuY3NodG1s
+[E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/NewsArticles/_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c0FydGljbGVzXF9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/SE_Ky7/DependencyInjection_Learing/TranNguyenHan_SE18B03_A01/TranNguyenHanMVC/Views/Report/Index.cshtml]
