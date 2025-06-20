@@ -7,61 +7,41 @@ namespace Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _repository;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository repository)
         {
-            _categoryRepository = categoryRepository;
+            _repository = repository;
         }
 
         public List<Category> GetCategories()
         {
-            return _categoryRepository.GetCategories();
+            return _repository.GetCategories();
         }
 
         public Category GetCategoryById(short id)
         {
-            return _categoryRepository.GetCategoryById(id);
+            return _repository.GetCategoryById(id);
         }
 
-        public List<Category> SearchCategories(string keyword)
+        public List<Category> SearchCategories(string searchKeyword)
         {
-            return _categoryRepository.SearchCategories(keyword);
+            return _repository.SearchCategories(searchKeyword);
         }
 
         public void SaveCategory(Category category)
         {
-            if (!ValidateCategory(category))
-                throw new ArgumentException("Invalid category data.");
-
-            _categoryRepository.SaveCategory(category);
+            _repository.SaveCategory(category);
         }
 
         public void UpdateCategory(Category category)
         {
-            if (!ValidateCategory(category))
-                throw new ArgumentException("Invalid category data.");
-
-            _categoryRepository.UpdateCategory(category);
+            _repository.UpdateCategory(category);
         }
 
         public void DeleteCategory(Category category)
         {
-            _categoryRepository.DeleteCategory(category);
-        }
-
-        private bool ValidateCategory(Category category)
-        {
-            if (category == null)
-                return false;
-
-            if (string.IsNullOrWhiteSpace(category.CategoryName) || category.CategoryName.Length > 100)
-                return false;
-
-            if (string.IsNullOrWhiteSpace(category.CategoryDesciption) || category.CategoryDesciption.Length > 250)
-                return false;
-
-            return true;
+            _repository.DeleteCategory(category);
         }
     }
 }

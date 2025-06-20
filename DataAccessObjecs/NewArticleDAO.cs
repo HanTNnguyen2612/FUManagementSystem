@@ -1,10 +1,11 @@
 ﻿using BusinessObjects;
+using DataAccessObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataAccessObjects
+namespace DataAccesser
 {
     public class NewsArticleDAO
     {
@@ -70,27 +71,20 @@ namespace DataAccessObjects
             }
         }
 
-        public static void SaveArticle(NewsArticle article, List<int> tagIds)
+        public static void SaveArticle(NewsArticle article)
         {
             try
             {
                 using (var db = new FunewsManagementContext())
                 {
+                    // Attach tags to context
+                    if (article.Tags != null && article.Tags.Any())
+                    {
+                        var tagIds = article.Tags.Select(t => t.TagId).ToList();
+                        article.Tags = db.Tags.Where(t => tagIds.Contains(t.TagId)).ToList();
+                    }
                     db.NewsArticles.Add(article);
                     db.SaveChanges();
-
-                    if (tagIds != null && tagIds.Any())
-                    {
-                        foreach (var tagId in tagIds)
-                        {
-                            var tag = db.Tags.Find(tagId);
-                            if (tag != null)
-                            {
-                                article.Tags.Add(tag);
-                            }
-                        }
-                        db.SaveChanges();
-                    }
                 }
             }
             catch (Exception e)
@@ -99,7 +93,7 @@ namespace DataAccessObjects
             }
         }
 
-        public static void UpdateArticle(NewsArticle article, List<int> tagIds)
+        public static void UpdateArticle(NewsArticle article)
         {
             try
             {
@@ -111,6 +105,7 @@ namespace DataAccessObjects
                     if (existingArticle == null)
                         throw new Exception("Article not found.");
 
+                    // Update properties
                     existingArticle.NewsTitle = article.NewsTitle;
                     existingArticle.Headline = article.Headline;
                     existingArticle.NewsContent = article.NewsContent;
@@ -120,16 +115,20 @@ namespace DataAccessObjects
                     existingArticle.CreatedById = article.CreatedById;
                     existingArticle.UpdatedById = article.UpdatedById;
                     existingArticle.ModifiedDate = article.ModifiedDate;
+                    existingArticle.CreatedDate = article.CreatedDate;
 
+                    // Clear existing tags
                     existingArticle.Tags.Clear();
-                    if (tagIds != null && tagIds.Any())
+
+                    // Add new tags
+                    if (article.Tags != null && article.Tags.Any())
                     {
-                        foreach (var tagId in tagIds)
+                        foreach (var tag in article.Tags)
                         {
-                            var tag = db.Tags.Find(tagId);
-                            if (tag != null)
+                            var dbTag = db.Tags.Find(tag.TagId);
+                            if (dbTag != null)
                             {
-                                existingArticle.Tags.Add(tag);
+                                existingArticle.Tags.Add(dbTag);
                             }
                         }
                     }

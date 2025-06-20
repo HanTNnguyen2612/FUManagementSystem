@@ -29,20 +29,20 @@ namespace Services
             return _newsArticleRepository.SearchArticles(keyword);
         }
 
-        public void SaveArticle(NewsArticle article, List<int> tagIds)
+        public void SaveArticle(NewsArticle article)
         {
             if (!ValidateNewsArticle(article))
                 throw new ArgumentException("Invalid article data.");
 
-            _newsArticleRepository.SaveArticle(article, tagIds);
+            _newsArticleRepository.SaveArticle(article);
         }
 
-        public void UpdateArticle(NewsArticle article, List<int> tagIds)
+        public void UpdateArticle(NewsArticle article)
         {
             if (!ValidateNewsArticle(article))
                 throw new ArgumentException("Invalid article data.");
 
-            _newsArticleRepository.UpdateArticle(article, tagIds);
+            _newsArticleRepository.UpdateArticle(article);
         }
 
         public void DeleteArticle(NewsArticle article)

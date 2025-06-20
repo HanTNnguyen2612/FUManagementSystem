@@ -211,7 +211,6 @@ namespace FUNewsManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
         }
-
         [Authorize(Roles = "0")]
         public IActionResult Edit(short? id)
         {
@@ -231,7 +230,7 @@ namespace FUNewsManagementSystem.Controllers
         public IActionResult Edit(short id, SystemAccount account)
         {
             if (id != account.AccountId || !ModelState.IsValid)
-                return PartialView("_Edit", account);
+                return Json(new { success = false, message = "Invalid data." });
 
             try
             {
@@ -240,6 +239,7 @@ namespace FUNewsManagementSystem.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error updating account ID {AccountId}.", id);
                 return RedirectToAction("Index");
             }
         }

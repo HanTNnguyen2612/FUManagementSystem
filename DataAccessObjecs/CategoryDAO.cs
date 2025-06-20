@@ -1,10 +1,11 @@
 ﻿using BusinessObjects;
+using DataAccessObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataAccessObjects
+namespace DataAccesser
 {
     public class CategoryDAO
     {
@@ -17,7 +18,6 @@ namespace DataAccessObjects
                     return db.Categories
                         .Include(c => c.ParentCategory)
                         .Include(c => c.InverseParentCategory)
-                        .Where(c => c.IsActive == true)
                         .ToList();
                 }
             }
@@ -36,7 +36,7 @@ namespace DataAccessObjects
                     return db.Categories
                         .Include(c => c.ParentCategory)
                         .Include(c => c.InverseParentCategory)
-                        .FirstOrDefault(c => c.CategoryId == id && c.IsActive == true);
+                        .FirstOrDefault(c => c.CategoryId == id);
                 }
             }
             catch (Exception e)
@@ -53,8 +53,8 @@ namespace DataAccessObjects
                 {
                     return db.Categories
                         .Include(c => c.ParentCategory)
-                        .Where(c => c.IsActive == true &&
-                                   (c.CategoryName.Contains(keyword) || c.CategoryDesciption.Contains(keyword)))
+                        .Where(c => c.CategoryName.Contains(keyword) ||
+                                  c.CategoryDesciption.Contains(keyword))
                         .ToList();
                 }
             }
@@ -70,6 +70,13 @@ namespace DataAccessObjects
             {
                 using (var db = new FunewsManagementContext())
                 {
+                    // Validate ParentCategoryId
+                    if (category.ParentCategoryId.HasValue &&
+                        db.Categories.Find(category.ParentCategoryId) == null)
+                    {
+                        throw new Exception("Parent category does not exist.");
+                    }
+
                     db.Categories.Add(category);
                     db.SaveChanges();
                 }
@@ -86,9 +93,24 @@ namespace DataAccessObjects
             {
                 using (var db = new FunewsManagementContext())
                 {
-                    var existingCategory = db.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
+                    var existingCategory = db.Categories
+                        .Include(c => c.InverseParentCategory)
+                        .FirstOrDefault(c => c.CategoryId == category.CategoryId);
                     if (existingCategory == null)
                         throw new Exception("Category not found.");
+
+                    // Validate ParentCategoryId
+                    if (category.ParentCategoryId.HasValue &&
+                        db.Categories.Find(category.ParentCategoryId) == null)
+                    {
+                        throw new Exception("Parent category does not exist.");
+                    }
+
+                    // Prevent self-reference
+                    if (category.ParentCategoryId == category.CategoryId)
+                    {
+                        throw new Exception("Category cannot be its own parent.");
+                    }
 
                     existingCategory.CategoryName = category.CategoryName;
                     existingCategory.CategoryDesciption = category.CategoryDesciption;
@@ -110,12 +132,18 @@ namespace DataAccessObjects
             {
                 using (var db = new FunewsManagementContext())
                 {
-                    if (db.NewsArticles.Any(n => n.CategoryId == category.CategoryId))
-                        throw new Exception("Cannot delete category as it is associated with news articles.");
-
-                    var existingCategory = db.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
+                    var existingCategory = db.Categories
+                        .Include(c => c.InverseParentCategory)
+                        .Include(c => c.NewsArticles)
+                        .FirstOrDefault(c => c.CategoryId == category.CategoryId);
                     if (existingCategory == null)
                         throw new Exception("Category not found.");
+
+                    // Check if category is referenced
+                    if (existingCategory.InverseParentCategory.Any())
+                        throw new Exception("Cannot delete category with subcategories.");
+                    if (existingCategory.NewsArticles.Any())
+                        throw new Exception("Cannot delete category with associated news articles.");
 
                     db.Categories.Remove(existingCategory);
                     db.SaveChanges();
