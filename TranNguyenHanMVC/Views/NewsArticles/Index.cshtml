@@ -73,6 +73,10 @@
 {
     <div class="mt-3">
         <a asp-action="Logout" asp-controller="SystemAccounts" class="btn btn-secondary">Logout</a>
+        @if (User.IsInRole("1"))
+        {
+            <a asp-controller="SystemAccounts" asp-action="Profile" class="btn btn-info">Profile</a>
+        }
     </div>
 }
 

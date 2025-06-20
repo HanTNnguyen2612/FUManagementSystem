@@ -72,5 +72,9 @@ namespace Services
 
             return true;
         }
+        public List<NewsArticle> GenerateReport(DateTime startDate, DateTime endDate)
+        {
+            return _newsArticleRepository.GenerateReport(startDate, endDate);
+        }
     }
 }

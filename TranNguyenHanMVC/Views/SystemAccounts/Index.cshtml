@@ -14,7 +14,13 @@
 </form>
 
 <!-- Nút Create -->
-<a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#createModal">Create New Account</a>
+<div class="mb-3">
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Create New Account</a>
+    @if (User.IsInRole("0"))
+    {
+        <a asp-controller="NewsArticles" asp-action="ArticleReport" class="btn btn-warning">Article Report</a>
+    }
+</div>
 
 <!-- Bảng danh sách tài khoản -->
 <table class="table table-striped" id="accountTable">

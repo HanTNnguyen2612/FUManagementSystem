@@ -5,7 +5,7 @@ using Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Security.Claims;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace FUNewsManagementSystem.Controllers
 {
@@ -36,7 +36,11 @@ namespace FUNewsManagementSystem.Controllers
             {
                 var articles = string.IsNullOrEmpty(searchKeyword)
                     ? _newsArticleService.GetArticles()
-                    : _newsArticleService.SearchArticles(searchKeyword);
+                    : _newsArticleService.SearchArticles(searchKeyword)
+                    .Where(a => a.NewsStatus.HasValue && a.NewsStatus.Value &&
+                            a.Category != null && a.Category.IsActive.HasValue && a.Category.IsActive.Value)
+                    .OrderByDescending(a => a.CreatedDate)
+                    .ToList();
 
                 var pagedArticles = articles
                     .Skip((pageNumber - 1) * PageSize)
@@ -91,7 +95,7 @@ namespace FUNewsManagementSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error loading Create view.");
-                return RedirectToAction("Index", "NewsArticle", new { error = "Error loading create form." });
+                return RedirectToAction("Index", new { error = "Error loading create form." });
             }
         }
 
@@ -102,7 +106,9 @@ namespace FUNewsManagementSystem.Controllers
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Invalid model state for creating article: {Title}", article.NewsTitle);
-                return RedirectToAction("Index", "NewsArticle", new { error = "Error loading data." });
+                ViewBag.Tags = _tagService.GetTags()?.ToList() ?? new List<Tag>();
+                ViewBag.Categories = _categoryService.GetCategories()?.ToList() ?? new List<Category>();
+                return PartialView("_Create", article);
             }
 
             try
@@ -125,12 +131,12 @@ namespace FUNewsManagementSystem.Controllers
 
                 _newsArticleService.SaveArticle(article);
                 _logger.LogInformation("Article {Title} created by user ID {UserId}.", article.NewsTitle, article.CreatedById);
-                return RedirectToAction("Index", new { success = true, message = "Article created successfully." });
+                return RedirectToAction("Index", new {success = true, message = " create successfully"});
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating article {Title}.", article.NewsTitle);
-                return RedirectToAction("Index", new { error = "Error creating article." });
+                return RedirectToAction("Index", new { success = false, message = "create new article failed" });
             }
         }
 
@@ -152,7 +158,7 @@ namespace FUNewsManagementSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error loading Edit view for article ID: {ArticleId}", id);
-                return RedirectToAction("Index", new { error = "Error loading edit form." });
+                return Json(new { success = false, message = "Error loading edit form." });
             }
         }
 
@@ -163,7 +169,9 @@ namespace FUNewsManagementSystem.Controllers
             if (string.IsNullOrEmpty(id) || !id.Equals(article.NewsArticleId) || !ModelState.IsValid)
             {
                 _logger.LogWarning("Invalid model state or ID mismatch for editing article ID: {ArticleId}", id);
-                return RedirectToAction("Index", new { error = "Error loading data." });
+                ViewBag.Tags = _tagService.GetTags()?.ToList() ?? new List<Tag>();
+                ViewBag.Categories = _categoryService.GetCategories()?.ToList() ?? new List<Category>();
+                return PartialView("_Edit", article);
             }
 
             try
@@ -190,7 +198,7 @@ namespace FUNewsManagementSystem.Controllers
 
                 _newsArticleService.UpdateArticle(existingArticle);
                 _logger.LogInformation("Article {Title} updated by user ID {UserId}.", existingArticle.NewsTitle, User.FindFirst("AccountId")?.Value);
-                return RedirectToAction("Index", new { success = true, message = "Article updated successfully." });
+                return RedirectToAction("Index", new { success = "Article updated successfully." });
             }
             catch (Exception ex)
             {
@@ -214,12 +222,54 @@ namespace FUNewsManagementSystem.Controllers
 
                 _newsArticleService.DeleteArticle(article);
                 _logger.LogInformation("Article {Title} deleted by user ID {UserId}.", article.NewsTitle, User.FindFirst("AccountId")?.Value);
-                return RedirectToAction("Index", new { success = true, message = "Article deleted successfully." });
+                return RedirectToAction("Index", new { success = "Article deleted successfully." });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting article ID: {ArticleId}", id);
                 return RedirectToAction("Index", new { error = "Error deleting article." });
+            }
+        }
+
+        [Authorize(Roles = "0")]
+        public IActionResult ArticleReport(DateTime? startDate, DateTime? endDate, int pageNumber = 1)
+        {
+            try
+            {
+                ViewBag.PagingInfo = new
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = PageSize,
+                    TotalItems = 0
+                };
+                ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+                ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
+
+                if (startDate.HasValue && endDate.HasValue)
+                {
+                    var articles = _newsArticleService.GenerateReport(startDate.Value, endDate.Value);
+
+                    var pagedArticles = articles
+                        .Skip((pageNumber - 1) * PageSize)
+                        .Take(PageSize)
+                        .ToList();
+
+                    ViewBag.PagingInfo = new
+                    {
+                        CurrentPage = pageNumber,
+                        ItemsPerPage = PageSize,
+                        TotalItems = articles.Count
+                    };
+
+                    return View(pagedArticles);
+                }
+
+                return View(new List<NewsArticle>());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error generating article report from {StartDate} to {EndDate}", startDate, endDate);
+                return View("Error");
             }
         }
     }

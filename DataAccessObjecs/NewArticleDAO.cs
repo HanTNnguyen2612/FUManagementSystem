@@ -164,5 +164,22 @@ namespace DataAccesser
                 throw new Exception("Error deleting article: " + e.Message);
             }
         }
+        public static List<NewsArticle> GenerateReport(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (var context = new FunewsManagementContext())
+                {
+                    return context.NewsArticles
+                        .Include(a => a.Category)
+                        .Where(a => a.CreatedDate >= startDate && a.CreatedDate <= endDate)
+                        .ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error generating report: " + e.Message);
+            }
+        }
     }
 }

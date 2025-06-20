@@ -18,8 +18,8 @@ namespace FUNewsManagementSystem.Controllers
         public IActionResult Index(int pageNumber = 1)
         {
             var articles = _newsArticleService.GetArticles()
-                .Where(a => a.NewsStatus.HasValue && a.NewsStatus.Value && // Kiểm tra NewsStatus == true
-                           a.Category != null && a.Category.IsActive.HasValue && a.Category.IsActive.Value) // Kiểm tra Category.IsActive == true
+                .Where(a => a.NewsStatus.HasValue && a.NewsStatus.Value && 
+                           a.Category != null && a.Category.IsActive.HasValue && a.Category.IsActive.Value) 
                 .OrderByDescending(a => a.CreatedDate)
                 .ToList();
 

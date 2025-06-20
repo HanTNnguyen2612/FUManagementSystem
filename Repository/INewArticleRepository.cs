@@ -11,5 +11,6 @@ namespace Repositories
         void SaveArticle(NewsArticle article);
         void UpdateArticle(NewsArticle article);
         void DeleteArticle(NewsArticle article);
+        List<NewsArticle> GenerateReport(DateTime startDate, DateTime endDate);
     }
 }

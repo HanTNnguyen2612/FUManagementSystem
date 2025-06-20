@@ -157,33 +157,98 @@ namespace FUNewsManagementSystem.Controllers
             return View(pagedAccounts);
         }
 
-        [Authorize]
+        [Authorize(Roles = "1")]
         public IActionResult Profile()
         {
-            var accountId = short.Parse(User.FindFirst("AccountId")?.Value ?? "0");
-            var account = _systemAccountService.GetAccountById(accountId);
-            if (account == null)
-                return NotFound();
-
-            return View(account);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public IActionResult Profile(SystemAccount account)
-        {
-            if (!ModelState.IsValid)
-                return View(account);
-
             try
             {
-                _systemAccountService.UpdateAccount(account);
-                return RedirectToAction("Profile");
+                var accountId = short.Parse(User.FindFirst("AccountId")?.Value ?? "0");
+                var account = _systemAccountService.GetAccountById(accountId);
+                if (account == null)
+                {
+                    _logger.LogWarning("Account not found for ID: {AccountId}", accountId);
+                    return NotFound();
+                }
+
+                return View(account);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", ex.Message);
-                return View(account);
+                _logger.LogError(ex, "Error loading profile for user ID: {AccountId}", User.FindFirst("AccountId")?.Value);
+                return View("Error");
+            }
+        }
+
+        [Authorize(Roles = "1")]
+        public IActionResult EditProfile()
+        {
+            try
+            {
+                var accountIdClaim = User.FindFirst("AccountId")?.Value;
+                _logger.LogInformation("EditProfile GET called, AccountId claim: {AccountId}, Role: {Role}", accountIdClaim, User.FindFirst(ClaimTypes.Role)?.Value);
+                if (string.IsNullOrEmpty(accountIdClaim) || !short.TryParse(accountIdClaim, out short accountId))
+                {
+                    _logger.LogWarning("Invalid or missing AccountId claim");
+                    return Unauthorized("Invalid user identity.");
+                }
+
+                var account = _systemAccountService.GetAccountById(accountId);
+                if (account == null)
+                {
+                    _logger.LogWarning("Account not found for ID: {AccountId}", accountId);
+                    return NotFound();
+                }
+
+                return PartialView("_EditProfile", account);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading EditProfile view for user ID: {AccountId}", User.FindFirst("AccountId")?.Value);
+                return Json(new { success = false, message = "Error loading edit form." });
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "1")]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditProfile(SystemAccount account)
+        {
+            try
+            {
+                var accountIdClaim = User.FindFirst("AccountId")?.Value;
+                _logger.LogInformation("EditProfile POST called, AccountId claim: {AccountId}, Input AccountID: {InputAccountId}", accountIdClaim, account.AccountId);
+                if (string.IsNullOrEmpty(accountIdClaim) || !short.TryParse(accountIdClaim, out short accountId) || account.AccountId != accountId)
+                {
+                    _logger.LogWarning("Invalid model state or ID mismatch for editing account ID: {AccountId}");
+                    return Json(new { success = false, message = "Invalid user identity." });
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogWarning("Invalid model state for editing account ID: {AccountId}", accountId);
+                    return PartialView("_EditProfile", account);
+                }
+
+                var existingAccount = _systemAccountService.GetAccountById(accountId);
+                if (existingAccount == null)
+                {
+                    _logger.LogWarning("Account not found for ID: {AccountId}", accountId);
+                    return RedirectToAction("Index", "NewsArticle", new {message ="account not found"});
+                }
+
+                existingAccount.AccountName = account.AccountName;
+                existingAccount.AccountEmail = account.AccountEmail;
+                existingAccount.AccountPassword = account.AccountPassword;
+                existingAccount.AccountRole = 1;
+
+                _systemAccountService.UpdateAccount(existingAccount);
+                _logger.LogInformation("Account {Email} updated by user ID: {AccountId}", existingAccount.AccountEmail, accountId);
+                return RedirectToAction("Profile", new { message = "Profile updated successfully." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating account ID: {AccountId}", account.AccountId);
+                return RedirectToAction("Profile", new { message = "Error updating profile." });
             }
         }
 
@@ -290,5 +355,6 @@ namespace FUNewsManagementSystem.Controllers
         {
             return View();
         }
+
     }
 }

@@ -36,5 +36,9 @@ namespace Repositories
         {
             NewsArticleDAO.DeleteArticle(article);
         }
+        public List<NewsArticle> GenerateReport(DateTime startDate, DateTime endDate)
+        {
+            return NewsArticleDAO.GenerateReport(startDate, endDate);
+        }
     }
 }
